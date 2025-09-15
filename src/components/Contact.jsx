@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import './Contact.css';
 import axios from 'axios';
+import { MONGO_URI } from '../main.jsx'; // use global backend URL
 
 const Contact = () => {
-  // Step 1: Manage form data with useState
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
 
-  // Step 2: Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -19,21 +18,14 @@ const Contact = () => {
     }));
   };
 
-  // Step 3: Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Send POST request to your backend
-      const res = await axios.post('http://localhost:3000/contact', formData);
+      const res = await axios.post(`${MONGO_URI}/contact`, formData); // <-- use API_URL
       console.log('Message sent:', res.data);
       alert('Message sent successfully!');
-      // Clear form after submission
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
+      setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.error('Error sending message:', error.response?.data || error.message);
       alert('Failed to send message!');
