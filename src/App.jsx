@@ -4,21 +4,24 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
-import Skills from './components/Skills';  // Skills import kiya
+import Skills from './components/Skills';
 
 const App = () => {
   return (
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={
-          <>
-            <Home />
-            <About />
-          </>
-        } />
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
+              <About />
+            </>
+          }
+        />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/skills" element={<Skills />} /> {/* Skills route add kiya */}
+        <Route path="/skills" element={<Skills />} />
       </Routes>
     </Router>
   );

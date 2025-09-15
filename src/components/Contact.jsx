@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './Contact.css';
 import axios from 'axios';
-import { MONGO_URI } from '../main.jsx'; // use global backend URL
+
+// Instead of MONGO_URI, define your backend API URL here
+const API_URL = "mongodb+srv://admin:kxR8tGfwTHWwX7ya@cluster0.aja2h.mongodb.net/"; // change this to your backend server URL
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -20,9 +22,8 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const res = await axios.post(`${MONGO_URI}/contact`, formData); // <-- use API_URL
+      const res = await axios.post(`${API_URL}/contact`, formData);
       console.log('Message sent:', res.data);
       alert('Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
